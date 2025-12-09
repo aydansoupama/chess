@@ -1,3 +1,20 @@
+"""
+Le jeu fait 8x8 cases (64 cases au total)
+Les cases vides sont attribuées par le nom "EC" (empty-case)
+
+Les cases remplies sont constituées de 3 arguments:
+- Le premier: Le type de pièce (Roi, Reine, Fou, Cavalier, Tour, Pion)
+- Le deuxième: La couleur (Blanc ou Noir)
+- Le troisième: la position de la case (A1, B3, etc.)
+
+Le premier et le deuxième sont collés alors que le troisième est séparé par un tiret
+
+
+A implémenter en cours demain:
+- Système de déplacement (pour les pions) => 1/2 cases au début, puis 1 droite ou diagonale selon
+    s'il peut manger ou pas
+
+"""
 class Game:
     def __init__(self):
         self.board = [["EC" for _ in range(8)] for _ in range(8)]
