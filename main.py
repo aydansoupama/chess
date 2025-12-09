@@ -1,6 +1,6 @@
 class Game:
     def __init__(self):
-        self.board = [[0 for _ in range(8)] for _ in range(8)]
+        self.board = [["EC" for _ in range(8)] for _ in range(8)]
         self.player = {}
 
     def display_board(self):
@@ -20,8 +20,8 @@ class Game:
             "knights": [Knight("blanc", (0, 1)), Knight("blanc", (0, 6))],
             "bishops": [Bishop("blanc", (0, 2)), Bishop("blanc", (0, 5))],
             "pawns": [Pawn("blanc", (1, i)) for i in range(8)],
-            "queen": Queen("noir", (0, 3)),
-            "king": King("noir", (0, 4)),
+            "queen": Queen("blanc", (0, 3)),
+            "king": King("blanc", (0, 4)),
         }
 
         pieces_noires = {
@@ -46,46 +46,46 @@ class Player:
         self.pieces = pieces
 
 
-class Pawn:
+class Piece:
     def __init__(self, couleur, coords):
         self.couleur = couleur
         self.coords = coords
-        game.board[coords[0]][coords[1]] = 1
+
+        p_type = self.get_type()
+        game.board[coords[0]][coords[1]] = p_type
+
+    def get_coords(self):
+        return self.coords
 
 
-class Rook:
-    def __init__(self, couleur, coords):
-        self.couleur = couleur
-        self.coords = coords
-        game.board[coords[0]][coords[1]] = 2
+class Pawn(Piece):
+    def get_type(self):
+        return "PW" if self.couleur == "blanc" else "PB"
 
 
-class Knight:
-    def __init__(self, couleur, coords):
-        self.couleur = couleur
-        self.coords = coords
-        game.board[coords[0]][coords[1]] = 3
+class Rook(Piece):
+    def get_type(self):
+        return "RW" if self.couleur == "blanc" else "RB"
 
 
-class Bishop:
-    def __init__(self, couleur, coords):
-        self.couleur = couleur
-        self.coords = coords
-        game.board[coords[0]][coords[1]] = 4
+class Knight(Piece):
+    def get_type(self):
+        return "NW" if self.couleur == "blanc" else "KB"
 
 
-class Queen:
-    def __init__(self, couleur, coords):
-        self.couleur = couleur
-        self.coords = coords
-        game.board[coords[0]][coords[1]] = 5
+class Bishop(Piece):
+    def get_type(self):
+        return "BW" if self.couleur == "blanc" else "BB"
 
 
-class King:
-    def __init__(self, couleur, coords):
-        self.couleur = couleur
-        self.coords = coords
-        game.board[coords[0]][coords[1]] = 6
+class Queen(Piece):
+    def get_type(self):
+        return "QW" if self.couleur == "blanc" else "QB"
+
+
+class King(Piece):
+    def get_type(self):
+        return "KW" if self.couleur == "blanc" else "KB"
 
 
 game = Game()
